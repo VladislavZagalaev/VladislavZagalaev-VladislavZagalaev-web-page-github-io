@@ -1,0 +1,71 @@
+<!DOCTYPE html>  
+<html lang="uk"> <!-- Установимо мову на українську -->  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Університет митної справи та фінансів</title>  
+    <link rel="stylesheet" type="text/css" href="style.css"> <!-- Підключення CSS -->  
+</head>  
+
+<body>  
+    <div class="main">  
+        <div class="content">  
+            <h1>МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ</h1>  
+            <h2>УНІВЕРСИТЕТ МИТНОЇ СПРАВИ ТА ФІНАНСІВ</h2>  
+            <h3>ФАКУЛЬТЕТ ІННОВАЦІЙНИХ ТЕХНОЛОГІЙ</h3>  
+            <h4>Кафедра комп’ютерних наук та інженерії</h4>  
+        </div>  
+    </div>  
+
+    <div class="content">  
+        <h3>Web page</h3>  
+
+        <p>Виконав:<br>  
+        Студент 3 курсу групи ІПЗ22-1<br>  
+        Загалаєв Владислав Володимирович</p>  
+
+        <p><a href="http://umsf.dp.ua/">Університет митної справи та фінансів</a></p>  
+        <p><a href="https://www.youtube.com/watch?v=eXxYWiQ43nk">Відеотур по Університету митної справи та фінансів</a></p>  
+
+        <img src="img\1.jpg" alt="Изображение" class="main-image">  
+    </div>  
+
+    <script>  
+        function navigateDOM(node, callback, depth = 0) {  
+            if (!node) return;  
+
+            // Показывает содержимое текущего узла и предлагает варианты  
+            let message = node.nodeType === Node.TEXT_NODE ? node.nodeValue.trim() : node.outerHTML;  
+            let options = [];  
+
+            if (node.nextElementSibling) {  
+                options.push('Далі'); // Переход к следующему узлу  
+            }  
+            if (depth > 0) {  
+                options.push('Назад'); // Возврат к родительскому узлу  
+            }  
+            if (!node.nextElementSibling && depth === 0) {  
+                options.push('Вихід'); // Выход из навигации  
+            }  
+
+            let choice = prompt(`${message}\n\nОберіть дію:\n${options.join('\n')}`);  
+
+            if (choice === 'Далі' && node.nextElementSibling) {  
+                navigateDOM(node.nextElementSibling, callback, depth + 1);  
+            } else if (choice === 'Назад' && depth > 0) {  
+                navigateDOM(node.parentNode, callback, depth - 1);  
+            } else if (choice === 'Вихід') {  
+                alert('Ви вийшли з навігації.');  
+                return;  
+            } else {  
+                alert('Некоректний вибір, спробуйте ще раз.');  
+                navigateDOM(node, callback, depth);  
+            }  
+        }  
+
+        // Запуск навигации с первого узла  
+        const rootNode = document.body.firstElementChild; // Первоначальный узел для навигации  
+        navigateDOM(rootNode);  
+    </script>  
+</body>  
+</html>  
